@@ -1,0 +1,10 @@
+{
+  "latestVersion": "1.4.0",
+  "minSupportedVersion": "1.0.0",
+  "androidUrl": "https://play.google.com/store/apps/details?id=com.mavericksmith.saffron",
+  "androidDirectUrl": "https://github.com/us-crypto/saffron-updates/releases/latest",
+  "notes": {
+    "en": "First public release: Persian-first recipes from many countries, translated into 12 languages, kitchen mode, favourites.",
+    "fa": "اولین نسخهٔ عمومی: دستورهای غذا از کشورهای مختلف، با ترجمه به ۱۲ زبان، حالت آشپزخانه و علاقه‌مندی‌ها."
+  }
+}
