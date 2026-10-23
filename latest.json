@@ -1,10 +1,9 @@
 {
-  "latestVersion": "1.6.1",
+  "latestVersion": "1.7.1",
   "minSupportedVersion": "1.0.0",
-  "androidUrl": "https://play.google.com/store/apps/details?id=com.mavericksmith.saffron",
-  "androidDirectUrl": "https://github.com/us-crypto/saffron-updates/releases/latest/download/saffron.apk",
+  "androidDirectUrl": "https://raw.githubusercontent.com/us-crypto/saffron-updates/main/saffron.apk",
   "notes": {
-    "en": "Tutorial videos now play inside the app.",
-    "fa": "ویدیوهای آموزشی حالا داخل خود برنامه پخش می‌شوند."
+    "en": "Fixed: the app now opens reliably on every phone.",
+    "fa": "رفع مشکل: برنامه حالا روی همهٔ گوشی‌ها درست باز می‌شود."
   }
 }
