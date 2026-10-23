@@ -1,10 +1,9 @@
 {
-  "latestVersion": "1.6.1",
+  "latestVersion": "1.7.0",
   "minSupportedVersion": "1.0.0",
-  "androidUrl": "https://play.google.com/store/apps/details?id=com.mavericksmith.saffron",
   "androidDirectUrl": "https://github.com/us-crypto/saffron-updates/releases/latest/download/saffron.apk",
   "notes": {
-    "en": "Tutorial videos now play inside the app.",
-    "fa": "ویدیوهای آموزشی حالا داخل خود برنامه پخش می‌شوند."
+    "en": "One app for the whole world. Cooking videos remind you about a VPN where YouTube is blocked.",
+    "fa": "یک نسخه برای همهٔ دنیا. در کشورهایی که یوتیوب فیلتر است، برای دیدن ویدیوها یادآوری VPN نمایش داده می‌شود."
   }
 }
