@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.7.1",
-  "minSupportedVersion": "1.0.0",
+  "latestVersion": "1.7.2",
+  "minSupportedVersion": "1.7.2",
   "androidDirectUrl": "https://raw.githubusercontent.com/us-crypto/saffron-updates/main/saffron.apk",
   "notes": {
-    "en": "Fixed: the app now opens reliably on every phone.",
-    "fa": "رفع مشکل: برنامه حالا روی همهٔ گوشی‌ها درست باز می‌شود."
+    "en": "New: full cooking guides for every dish, a tip box and a red tutorial-video button.",
+    "fa": "تازه: راهنمای کامل پخت برای همهٔ غذاها، جعبهٔ نکته و دکمهٔ قرمز ویدیوی آموزشی."
   }
 }
