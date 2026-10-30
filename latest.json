@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.7.2",
-  "minSupportedVersion": "1.7.2",
+  "latestVersion": "1.7.3",
+  "minSupportedVersion": "1.7.3",
   "androidDirectUrl": "https://raw.githubusercontent.com/us-crypto/saffron-updates/main/saffron.apk",
   "notes": {
-    "en": "New: full cooking guides for every dish, a tip box and a red tutorial-video button.",
-    "fa": "تازه: راهنمای کامل پخت برای همهٔ غذاها، جعبهٔ نکته و دکمهٔ قرمز ویدیوی آموزشی."
+    "en": "New: Afghan dishes, dish search in any language, a friendly greeting and a free way to support us.",
+    "fa": "تازه: غذاهای افغانی، جستجوی غذا به هر زبان، خوش‌آمدگویی دوستانه و راه رایگان حمایت."
   }
 }
