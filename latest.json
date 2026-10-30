@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.7.3",
-  "minSupportedVersion": "1.7.3",
+  "latestVersion": "1.7.4",
+  "minSupportedVersion": "1.7.4",
   "androidDirectUrl": "https://raw.githubusercontent.com/us-crypto/saffron-updates/main/saffron.apk",
   "notes": {
-    "en": "New: Afghan dishes, dish search in any language, a friendly greeting and a free way to support us.",
-    "fa": "تازه: غذاهای افغانی، جستجوی غذا به هر زبان، خوش‌آمدگویی دوستانه و راه رایگان حمایت."
+    "en": "Better dish pictures, a fixed Home button and clearer support buttons. Iranian and Afghan dishes work offline.",
+    "fa": "عکس غذاها بهتر شد، دکمهٔ خانه درست شد و دکمه‌های حمایت واضح‌تر شدن. غذاهای ایرانی و افغانی بدون اینترنت هم کار می‌کنن."
   }
 }
