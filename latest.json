@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.7.4",
-  "minSupportedVersion": "1.7.4",
+  "latestVersion": "1.7.5",
+  "minSupportedVersion": "1.7.5",
   "androidDirectUrl": "https://raw.githubusercontent.com/us-crypto/saffron-updates/main/saffron.apk",
   "notes": {
-    "en": "Better dish pictures, a fixed Home button and clearer support buttons. Iranian and Afghan dishes work offline.",
-    "fa": "عکس غذاها بهتر شد، دکمهٔ خانه درست شد و دکمه‌های حمایت واضح‌تر شدن. غذاهای ایرانی و افغانی بدون اینترنت هم کار می‌کنن."
+    "en": "Photos for 10 more dishes, a clearer coffee window and ad wording, and a longer emoji pop.",
+    "fa": "عکس برای ۱۰ غذای دیگر، پنجرهٔ قهوهٔ واضح‌تر و متن تبلیغ شفاف‌تر، و انیمیشن ایموجی طولانی‌تر."
   }
 }
