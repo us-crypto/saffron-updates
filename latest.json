@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.7.5",
-  "minSupportedVersion": "1.7.5",
+  "latestVersion": "1.7.6",
+  "minSupportedVersion": "1.7.6",
   "androidDirectUrl": "https://raw.githubusercontent.com/us-crypto/saffron-updates/main/saffron.apk",
   "notes": {
-    "en": "Photos for 10 more dishes, a clearer coffee window and ad wording, and a longer emoji pop.",
-    "fa": "عکس برای ۱۰ غذای دیگر، پنجرهٔ قهوهٔ واضح‌تر و متن تبلیغ شفاف‌تر، و انیمیشن ایموجی طولانی‌تر."
+    "en": "Banner ads hide after your 5th ad, a Kale Pache recipe, a YouTube button, and clearer ad error codes.",
+    "fa": "پنهان‌شدن بنر بعد از تبلیغ پنجم، دستور کله‌پاچه، دکمهٔ یوتیوب و کدهای خطای واضح‌تر برای تبلیغ."
   }
 }
