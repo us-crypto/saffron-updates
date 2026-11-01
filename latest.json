@@ -1,9 +1,10 @@
 {
-  "latestVersion": "1.7.6",
-  "minSupportedVersion": "1.7.6",
+  "latestVersion": "1.7.7",
+  "minSupportedVersion": "1.7.7",
   "androidDirectUrl": "https://raw.githubusercontent.com/us-crypto/saffron-updates/main/saffron.apk",
+  "androidDirectSize": 33789268,
   "notes": {
-    "en": "Banner ads hide after your 5th ad, a Kale Pache recipe, a YouTube button, and clearer ad error codes.",
-    "fa": "پنهان‌شدن بنر بعد از تبلیغ پنجم، دستور کله‌پاچه، دکمهٔ یوتیوب و کدهای خطای واضح‌تر برای تبلیغ."
+    "en": "New versions now download and install inside the app, and choosing your kitchen devices is required.",
+    "fa": "حالا نسخه‌های تازه داخل خود برنامه دانلود و نصب می‌شوند و انتخاب وسایل آشپزخانه الزامی است."
   }
 }
