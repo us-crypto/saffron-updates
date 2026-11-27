@@ -9,19 +9,30 @@ if [ -z "$TOKEN" ]; then echo "Missing the runner token (the long text after --t
 if [ "$(id -u)" != "0" ]; then echo "Run this as root."; exit 1; fi
 
 REPO_URL="https://github.com/us-crypto/saffron-app"
+# Use the same build user and the same Android tools as the other apps on this server when they exist
+# (saves about 7 GB). Otherwise create a build user and its own Android tools.
 RUN_USER="saffronrunner"
-RUN_HOME="/home/${RUN_USER}"
-RUNNER_DIR="${RUN_HOME}/actions-runner"
+if id builder >/dev/null 2>&1; then RUN_USER="builder"; fi
+RUN_HOME="$(getent passwd "$RUN_USER" | cut -d: -f6 || true)"
+[ -n "$RUN_HOME" ] || RUN_HOME="/home/${RUN_USER}"
+RUNNER_DIR="${RUN_HOME}/actions-runner-saffron"
 SDK="${RUN_HOME}/android-sdk"
+for c in /opt/android-sdk /usr/lib/android-sdk "${RUN_HOME}/android-sdk" "${RUN_HOME}/Android/Sdk"; do
+  if [ -x "$c/cmdline-tools/latest/bin/sdkmanager" ]; then SDK="$c"; break; fi
+done
+RUN_AS() { su -l -s /bin/bash "$RUN_USER" -c "$1"; }
 RUNNER_VER="2.338.2"
 RUNNER_SHA="baebf204307bac6193480852732f0aba2ae97b6c5597c244f4d5558390147c40"
 CMDTOOLS="commandlinetools-linux-11076708_latest.zip"
+
+echo "== 0/7 Self-cleaning for the build server (removes leftovers of finished builds, also for the other apps)"
+curl -fsSL https://raw.githubusercontent.com/us-crypto/saffron-updates/main/tools/server-cleanup.sh | bash || true
 
 echo "== 1/7 Disk and network check"
 mkdir -p /home
 FREE_GB=$(df -BG --output=avail /home | tail -1 | tr -dc '0-9')
 echo "Free disk space: ${FREE_GB} GB"
-if [ "${FREE_GB}" -lt 12 ]; then echo "Less than 12 GB free. Free some space first (an Android build needs about 10 GB)."; exit 1; fi
+if [ "${FREE_GB}" -lt 10 ]; then echo "Still less than 10 GB free after cleaning. Send me the list of biggest folders printed above."; exit 1; fi
 for u in https://github.com https://dl.google.com/android/repository/ https://maven.google.com https://services.gradle.org; do
   code=$(curl -s -o /dev/null -m 15 -w '%{http_code}' "$u" || true)
   echo "  $u -> $code"
@@ -34,7 +45,7 @@ apt-get update -qq
 apt-get install -y -qq openjdk-17-jdk-headless unzip zip curl git python3 python3-venv gh util-linux >/dev/null
 
 echo "== 3/7 Extra memory (swap) so the 4 GB server does not run out during a build"
-if [ -z "$(swapon --show --noheadings)" ] && [ "${FREE_GB}" -ge 16 ]; then
+if [ -z "$(swapon --show --noheadings)" ] && [ "${FREE_GB}" -ge 14 ]; then
   fallocate -l 4G /swapfile && chmod 600 /swapfile && mkswap /swapfile >/dev/null && swapon /swapfile
   grep -q '^/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' >> /etc/fstab
   echo "  4 GB swap added"
@@ -44,6 +55,7 @@ fi
 
 echo "== 4/7 Build user"
 id "$RUN_USER" >/dev/null 2>&1 || useradd -m -s /bin/bash "$RUN_USER"
+echo "  build user: $RUN_USER, Android tools: $SDK"
 
 echo "== 5/7 Android tools"
 if [ ! -x "${SDK}/cmdline-tools/latest/bin/sdkmanager" ]; then
@@ -56,7 +68,9 @@ if [ ! -x "${SDK}/cmdline-tools/latest/bin/sdkmanager" ]; then
   rm -rf "$TMP"
   chown -R "${RUN_USER}:${RUN_USER}" "$SDK"
 fi
-su - "$RUN_USER" -c "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64; yes | ${SDK}/cmdline-tools/latest/bin/sdkmanager --sdk_root=${SDK} --licenses >/dev/null; ${SDK}/cmdline-tools/latest/bin/sdkmanager --sdk_root=${SDK} 'platform-tools' >/dev/null"
+# the build user must be able to write there (Gradle adds missing parts by itself)
+if ! RUN_AS "test -w ${SDK}"; then chown -R "${RUN_USER}:${RUN_USER}" "$SDK"; fi
+RUN_AS "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64; yes | ${SDK}/cmdline-tools/latest/bin/sdkmanager --sdk_root=${SDK} --licenses >/dev/null; ${SDK}/cmdline-tools/latest/bin/sdkmanager --sdk_root=${SDK} 'platform-tools' >/dev/null" || true
 echo "  Android tools ready"
 
 echo "== 6/7 GitHub build runner"
@@ -70,7 +84,7 @@ if [ ! -x "${RUNNER_DIR}/config.sh" ]; then
   chown -R "${RUN_USER}:${RUN_USER}" "$RUNNER_DIR"
 fi
 if [ ! -f "${RUNNER_DIR}/.runner" ]; then
-  su - "$RUN_USER" -c "cd ${RUNNER_DIR} && ./config.sh --unattended --replace --url ${REPO_URL} --token ${TOKEN} --name canada-saffron --labels saffron --work _work"
+  RUN_AS "cd ${RUNNER_DIR} && ./config.sh --unattended --replace --url ${REPO_URL} --token ${TOKEN} --name canada-saffron --labels saffron --work _work"
 fi
 cat > "${RUNNER_DIR}/.env" <<EOF
 ANDROID_HOME=${SDK}
