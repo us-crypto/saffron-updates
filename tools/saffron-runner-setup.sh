@@ -26,6 +26,12 @@ RUNNER_SHA="baebf204307bac6193480852732f0aba2ae97b6c5597c244f4d5558390147c40"
 CMDTOOLS="commandlinetools-linux-11076708_latest.zip"
 
 echo "== 0/7 Self-cleaning for the build server (removes leftovers of finished builds, also for the other apps)"
+# another app may be building right now: its files must not be touched, so wait until it is finished (up to 40 minutes)
+for i in $(seq 1 80); do
+  pgrep -f "Runner.Worker" >/dev/null 2>&1 || break
+  if [ $((i % 6)) -eq 1 ]; then echo "  another app is building on this server right now - waiting for it to finish (up to 40 minutes) ..."; fi
+  sleep 30
+done
 curl -fsSL https://raw.githubusercontent.com/us-crypto/saffron-updates/main/tools/server-cleanup.sh | bash || true
 
 echo "== 1/7 Disk and network check"
